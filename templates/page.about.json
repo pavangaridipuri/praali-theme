@@ -1,0 +1,28 @@
+{
+  "sections": {
+    "about_rows": {
+      "type": "image-text",
+      "settings": {
+        "heading": "About Us",
+        "padding_top": 120,
+        "padding_bottom": 64
+      },
+      "blocks": {
+        "row_1": {
+          "type": "row",
+          "settings": {
+            "image_position": "right"
+          }
+        },
+        "row_2": {
+          "type": "row",
+          "settings": {
+            "image_position": "left"
+          }
+        }
+      },
+      "block_order": ["row_1", "row_2"]
+    }
+  },
+  "order": ["about_rows"]
+}
