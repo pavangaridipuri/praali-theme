@@ -1,0 +1,103 @@
+{%- comment -%}
+  Page hero: one full-width photo at the top of a page.
+  Used on: About Us, Why India, Letters from Praali.
+  The header floats over the top of the photo (same as the homepage).
+{%- endcomment -%}
+
+<section
+  class="page-hero"
+  style="--page-hero-height: {{ section.settings.height }}vh; --page-hero-height-mobile: {{ section.settings.height_mobile }}vh; --page-hero-focus: {{ section.settings.focus }};"
+>
+  {%- if section.settings.image != blank -%}
+    {{
+      section.settings.image
+      | image_url: width: 2400
+      | image_tag:
+        class: 'page-hero__image',
+        loading: 'eager',
+        fetchpriority: 'high',
+        widths: '750, 1100, 1500, 1800, 2400',
+        sizes: '100vw',
+        alt: section.settings.image.alt
+    }}
+  {%- else -%}
+    {{ 'lifestyle-1' | placeholder_svg_tag: 'page-hero__image page-hero__placeholder' }}
+  {%- endif -%}
+</section>
+
+{% stylesheet %}
+  .page-hero {
+    position: relative;
+    width: 100%;
+    height: var(--page-hero-height, 60vh);
+    min-height: 320px;
+    overflow: hidden;
+    background: var(--line);
+  }
+
+  .page-hero__image {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: var(--page-hero-focus, center);
+  }
+
+  .page-hero__placeholder {
+    fill: rgba(0, 44, 57, 0.15);
+  }
+
+  @media (max-width: 749px) {
+    .page-hero {
+      height: var(--page-hero-height-mobile, 50vh);
+      min-height: 260px;
+    }
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Page hero",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Image"
+    },
+    {
+      "type": "range",
+      "id": "height",
+      "label": "Height on desktop",
+      "info": "Percent of the screen height",
+      "min": 30,
+      "max": 100,
+      "step": 5,
+      "unit": "%",
+      "default": 60
+    },
+    {
+      "type": "range",
+      "id": "height_mobile",
+      "label": "Height on phones",
+      "min": 30,
+      "max": 100,
+      "step": 5,
+      "unit": "%",
+      "default": 50
+    },
+    {
+      "type": "select",
+      "id": "focus",
+      "label": "Keep this part of the photo visible",
+      "info": "When the photo is cropped to fit, this part stays in view",
+      "options": [
+        { "value": "top", "label": "Top" },
+        { "value": "center", "label": "Middle" },
+        { "value": "bottom", "label": "Bottom" }
+      ],
+      "default": "center"
+    }
+  ],
+  "presets": [{ "name": "Page hero" }]
+}
+{% endschema %}
