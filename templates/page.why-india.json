@@ -1,0 +1,44 @@
+{
+  "sections": {
+    "hero": {
+      "type": "page-hero",
+      "settings": {
+        "height": 60,
+        "height_mobile": 50,
+        "focus": "top"
+      }
+    },
+    "why_india_rows": {
+      "type": "image-text",
+      "settings": {
+        "heading": "Why India",
+        "padding_top": 64,
+        "padding_bottom": 64
+      },
+      "blocks": {
+        "row_1": { "type": "row", "settings": { "image_position": "right" } },
+        "row_2": { "type": "row", "settings": { "image_position": "left" } },
+        "row_3": { "type": "row", "settings": { "image_position": "right" } },
+        "row_4": {
+          "type": "row",
+          "settings": {
+            "image_position": "left",
+            "button_label": "Learn more",
+            "button_link": "/"
+          }
+        },
+        "row_5": { "type": "row", "settings": { "image_position": "right" } }
+      },
+      "block_order": ["row_1", "row_2", "row_3", "row_4", "row_5"]
+    },
+    "love_letters": {
+      "type": "featured-articles",
+      "settings": {
+        "heading": "Love Letters from Praali",
+        "blog": "journal",
+        "articles_to_show": 3
+      }
+    }
+  },
+  "order": ["hero", "why_india_rows", "love_letters"]
+}
