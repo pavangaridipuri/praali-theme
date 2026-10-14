@@ -1,0 +1,20 @@
+{
+  "sections": {
+    "hero": {
+      "type": "page-hero",
+      "settings": {
+        "height": 65,
+        "height_mobile": 50,
+        "focus": "center"
+      }
+    },
+    "letters": {
+      "type": "letters-list",
+      "settings": {
+        "heading": "Love Letters From Praali",
+        "button_label": "Read more"
+      }
+    }
+  },
+  "order": ["hero", "letters"]
+}
