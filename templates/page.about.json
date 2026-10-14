@@ -30,7 +30,51 @@
         }
       },
       "block_order": ["row_1", "row_2"]
+    },
+    "practices": {
+      "type": "practices",
+      "settings": {
+        "heading": "Our Practices",
+        "background": "#E3DDD3",
+        "padding_top": 72,
+        "padding_bottom": 72
+      },
+      "blocks": {
+        "practice_1": {
+          "type": "practice",
+          "settings": {
+            "title": "Ethical Manufacturing"
+          }
+        },
+        "practice_2": {
+          "type": "practice",
+          "settings": {
+            "title": "Rooted in Craft"
+          }
+        },
+        "practice_3": {
+          "type": "practice",
+          "settings": {
+            "title": "Intentional Design"
+          }
+        },
+        "practice_4": {
+          "type": "practice",
+          "settings": {
+            "title": "For Women, By Women"
+          }
+        }
+      },
+      "block_order": ["practice_1", "practice_2", "practice_3", "practice_4"]
+    },
+    "love_letters": {
+      "type": "featured-articles",
+      "settings": {
+        "heading": "Love Letters from Praali",
+        "blog": "journal",
+        "articles_to_show": 3
+      }
     }
   },
-  "order": ["hero", "about_rows"]
+  "order": ["hero", "about_rows", "practices", "love_letters"]
 }
