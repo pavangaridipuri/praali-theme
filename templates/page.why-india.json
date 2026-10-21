@@ -11,34 +11,74 @@
     "why_india_rows": {
       "type": "image-text",
       "settings": {
-        "heading": "Why India",
+        "heading": "WHY INDIA",
         "padding_top": 64,
         "padding_bottom": 64
       },
       "blocks": {
-        "row_1": { "type": "row", "settings": { "image_position": "right" } },
-        "row_2": { "type": "row", "settings": { "image_position": "left" } },
-        "row_3": { "type": "row", "settings": { "image_position": "right" } },
+        "row_1": {
+          "type": "row",
+          "settings": {
+            "image_position": "right",
+            "title": "Yoga Comes From India",
+            "text": "<p>… so naturally, we wanted to make our clothes there, too.</p><p>Every dollar spent at Praali goes back to the birthplace of Yoga so that for once Indian people are centered, respected, and can profit from the global trillion dollar Yoga industry. Our clothes are vehicles for platforming Indian wellness wisdom.</p>"
+          }
+        },
+        "row_2": {
+          "type": "row",
+          "settings": {
+            "image_position": "left",
+            "title": "India Has a Long History with Cotton",
+            "text": "<p><em>“It is so transparent and light that it looks as if one is in no dress at all but has only smeared the body with pure water.”</em></p><p>— Amir Khusrau, legendary Indian poet, describing Bengal muslin (cotton) c. 1320s</p>"
+          }
+        },
+        "row_3": {
+          "type": "row",
+          "settings": {
+            "image_position": "right",
+            "text": "<p>India first began producing cotton in the times of the Indus River Valley Civilization. Over centuries, they began to master its production, weaving the finest of cottons and applying the most intricate craft styles to it.</p><p>During their colonial rule, the British even banned Indian cotton to give their industries a lasting chance in global markets.</p><p>Recognizing the power of Indian cotton, Gandhi turned hand-spun and hand woven khadi cotton into a symbol of India’s resistance and self-reliance.</p>"
+          }
+        },
         "row_4": {
           "type": "row",
           "settings": {
             "image_position": "left",
+            "text": "<p>Praali brings together two of India’s greatest legacies: the cotton we’ve mastered for millennia and the practice of Yoga we gave the world in our clothing.</p><p>We specifically use cotton from the Better Cotton Initiative (BCI).</p>",
             "button_label": "Learn more",
             "button_link": "/"
           }
         },
-        "row_5": { "type": "row", "settings": { "image_position": "right" } }
+        "row_5": {
+          "type": "row",
+          "settings": {
+            "image_position": "right",
+            "title": "The Body, As Understood by Ancient India is remarkable.",
+            "text": "<p>From <em>Ayurveda</em> and Yoga to the <em>Natya Shastra</em> and <em>Kama Sutra</em>, ancient Indian thinkers spent thousands of years contemplating how to nourish, heal, move, and inhabit our bodies.</p><p>All of Praali’s events and designs are inspired by these ancient Indian traditions and treatises.</p>"
+          }
+        }
       },
-      "block_order": ["row_1", "row_2", "row_3", "row_4", "row_5"]
+      "block_order": [
+        "row_1",
+        "row_2",
+        "row_3",
+        "row_4",
+        "row_5"
+      ]
     },
     "love_letters": {
-      "type": "featured-articles",
+      "type": "love-letters",
       "settings": {
-        "heading": "Love Letters from Praali",
+        "heading": "Love Letters From Praali",
+        "subtitle": "<p>Everything at Praali comes from love.<br>Discover the thought behind it:</p>",
         "blog": "journal",
-        "articles_to_show": 3
+        "articles_to_show": 3,
+        "button_label": "Read more"
       }
     }
   },
-  "order": ["hero", "why_india_rows", "love_letters"]
+  "order": [
+    "hero",
+    "why_india_rows",
+    "love_letters"
+  ]
 }

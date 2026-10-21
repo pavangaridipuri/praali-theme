@@ -19,17 +19,22 @@
         "row_1": {
           "type": "row",
           "settings": {
-            "image_position": "right"
+            "image_position": "right",
+            "text": "<p>Praali makes functional, ethically made, Indian craft-inspired Yoga clothes. Designed by women, our pieces use natural fibers and are made with women’s bodies, lives, and practices in mind.</p><p>Above all, our clothes are simply a vehicle for bringing reverence, recognition, and revenue back to India, where Yoga began.</p>"
           }
         },
         "row_2": {
           "type": "row",
           "settings": {
-            "image_position": "left"
+            "image_position": "left",
+            "text": "<p>We reject the extremes of modern wellness: the pressure to be perfectly disciplined, impossibly beautiful, or endlessly optimized.</p><p>We believe there’s room for girlhood in wellness. For creativity, whimsy, pleasure, and a little unseriousness.</p>"
           }
         }
       },
-      "block_order": ["row_1", "row_2"]
+      "block_order": [
+        "row_1",
+        "row_2"
+      ]
     },
     "practices": {
       "type": "practices",
@@ -43,38 +48,54 @@
         "practice_1": {
           "type": "practice",
           "settings": {
-            "title": "Ethical Manufacturing"
+            "title": "Ethical Manufacturing",
+            "text": "<p>We partner with factories that pay fair wages, provide good working conditions, and prohibit child labor.<br>We produce in small batches to minimize waste and recycle scrap fabric.</p>"
           }
         },
         "practice_2": {
           "type": "practice",
           "settings": {
-            "title": "Rooted in Craft"
+            "title": "Rooted in Craft",
+            "text": "<p>Where possible, we’re committed to creating clothing that champions Indian craft and directly works with artisans—that includes innovating on ancestral techniques for our modern designs.</p>"
           }
         },
         "practice_3": {
           "type": "practice",
           "settings": {
-            "title": "Intentional Design"
+            "title": "Intentional Design",
+            "text": "<p>Beyond aesthetics, our clothes were designed to solve gaps in the activewear industry and pain points in Yoga clothing. We believe our clothes should be designed for every body, not just sized for every body.</p>"
           }
         },
         "practice_4": {
           "type": "practice",
           "settings": {
-            "title": "For Women, By Women"
+            "title": "For Women, By Women",
+            "text": "<p>Our internal team is entirely women, and we aspire to a fully women-owned supply chain.<br>Our models are our customers and friends and we don’t edit bodies and faces &lt;3</p>"
           }
         }
       },
-      "block_order": ["practice_1", "practice_2", "practice_3", "practice_4"]
+      "block_order": [
+        "practice_1",
+        "practice_2",
+        "practice_3",
+        "practice_4"
+      ]
     },
     "love_letters": {
-      "type": "featured-articles",
+      "type": "love-letters",
       "settings": {
-        "heading": "Love Letters from Praali",
+        "heading": "Love Letters From Praali",
+        "subtitle": "<p>Everything at Praali comes from love.<br>Discover the thought behind it:</p>",
         "blog": "journal",
-        "articles_to_show": 3
+        "articles_to_show": 3,
+        "button_label": "Read more"
       }
     }
   },
-  "order": ["hero", "about_rows", "practices", "love_letters"]
+  "order": [
+    "hero",
+    "about_rows",
+    "practices",
+    "love_letters"
+  ]
 }

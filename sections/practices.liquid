@@ -34,6 +34,7 @@
       <ul class="practices__list">
         {%- for block in section.blocks -%}
           <li class="practices__item" {{ block.shopify_attributes }}>
+            <span class="practices__number">{% if forloop.index < 10 %}0{% endif %}{{ forloop.index }}</span>
             <h3 class="practices__title">{{ block.settings.title }}</h3>
             <div class="practices__text">{{ block.settings.text }}</div>
           </li>
@@ -59,8 +60,9 @@
   .practices__heading {
     font-family: inherit;
     font-weight: 300;
-    font-size: 14px;
-    letter-spacing: 0.15em;
+    font-size: 28px;
+    letter-spacing: 0.12em;
+    color: var(--brand-green, #5C6B4B);
     text-transform: uppercase;
   }
 
@@ -76,12 +78,12 @@
 
   .practices__list {
     list-style: none;
-    max-width: 640px;
+    max-width: 720px;
   }
 
   .practices__item {
     position: relative;
-    padding-left: 20px;
+    padding-left: 40px;
     margin-bottom: 28px;
   }
 
@@ -89,22 +91,21 @@
     margin-bottom: 0;
   }
 
-  /* Small marker before each practice, like the design */
-  .practices__item::before {
-    content: "";
+  /* Small number before each practice (01, 02...), like the design */
+  .practices__number {
     position: absolute;
     left: 0;
-    top: 0.45em;
-    width: 7px;
-    height: 7px;
-    border: 1px solid currentColor;
-    border-radius: 50%;
+    top: 0.5em;
+    font-size: 10px;
+    letter-spacing: 0.05em;
+    text-decoration: underline;
   }
 
   .practices__title {
     font-family: inherit;
-    font-weight: 400;
-    font-size: 15px;
+    font-weight: 300;
+    font-size: 24px;
+    color: var(--brand-green, #5C6B4B);
     margin-bottom: 6px;
   }
 

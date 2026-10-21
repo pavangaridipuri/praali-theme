@@ -1,0 +1,84 @@
+{%- comment -%}
+  Love Letters preview: heading + subtitle + a few blog posts as photo cards.
+  Used at the bottom of About Us and Why India.
+  The card look (.letter-card...) is defined once in sections/letters-list.liquid.
+  Shopify combines every section's {% stylesheet %} into one file, so those
+  styles are available here too.
+{%- endcomment -%}
+
+{%- assign letters_blog = blogs[section.settings.blog] -%}
+
+<section class="love-letters" style="padding-top: {{ section.settings.padding_top }}px; padding-bottom: {{ section.settings.padding_bottom }}px;">
+  <div class="container">
+    <div class="letters__intro">
+      {%- if section.settings.heading != blank -%}
+        <h2 class="letters__heading love-letters__heading">{{ section.settings.heading }}</h2>
+      {%- endif -%}
+      {%- if section.settings.subtitle != blank -%}
+        <div class="letters__subtitle">{{ section.settings.subtitle }}</div>
+      {%- endif -%}
+    </div>
+
+    {%- if letters_blog != blank and letters_blog.articles.size > 0 -%}
+      <div class="letters__grid">
+        {%- for article in letters_blog.articles limit: section.settings.articles_to_show -%}
+          <a class="letter-card" href="{{ article.url }}">
+            {%- if article.image -%}
+              {{
+                article.image
+                | image_url: width: 900
+                | image_tag:
+                  class: 'letter-card__image',
+                  loading: 'lazy',
+                  widths: '400, 600, 900',
+                  sizes: '(min-width: 750px) 33vw, 100vw',
+                  alt: article.title
+              }}
+            {%- else -%}
+              {{ 'image' | placeholder_svg_tag: 'letter-card__image letter-card__placeholder' }}
+            {%- endif -%}
+            <span class="letter-card__overlay">
+              <span class="letter-card__title">{{ article.title }}</span>
+              <span class="letter-card__button">{{ section.settings.button_label }}</span>
+            </span>
+          </a>
+        {%- endfor -%}
+      </div>
+    {%- else -%}
+      <p class="letters__empty">Letters coming soon.</p>
+    {%- endif -%}
+  </div>
+</section>
+
+{% stylesheet %}
+  .love-letters {
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    background: var(--bg);
+  }
+
+  .love-letters__heading {
+    text-transform: uppercase;
+    color: var(--brand-green, #5C6B4B);
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Love letters",
+  "settings": [
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Love Letters From Praali" },
+    {
+      "type": "richtext",
+      "id": "subtitle",
+      "label": "Subtitle",
+      "default": "<p>Everything at Praali comes from love.<br>Discover the thought behind it:</p>"
+    },
+    { "type": "blog", "id": "blog", "label": "Blog to show posts from" },
+    { "type": "range", "id": "articles_to_show", "label": "Number of posts", "min": 1, "max": 6, "step": 1, "default": 3 },
+    { "type": "text", "id": "button_label", "label": "Button label", "default": "Read more" },
+    { "type": "range", "id": "padding_top", "label": "Space above", "min": 0, "max": 160, "step": 8, "unit": "px", "default": 64 },
+    { "type": "range", "id": "padding_bottom", "label": "Space below", "min": 0, "max": 160, "step": 8, "unit": "px", "default": 80 }
+  ],
+  "presets": [{ "name": "Love letters" }]
+}
+{% endschema %}

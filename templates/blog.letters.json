@@ -12,9 +12,13 @@
       "type": "letters-list",
       "settings": {
         "heading": "Love Letters From Praali",
+        "subtitle": "<p>Everything at Praali comes from love.<br>Discover the thought behind it:</p>",
         "button_label": "Read more"
       }
     }
   },
-  "order": ["hero", "letters"]
+  "order": [
+    "hero",
+    "letters"
+  ]
 }
