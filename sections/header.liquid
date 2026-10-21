@@ -1,18 +1,463 @@
+{%- comment -%}
+  Site header (shown on every page).
+  - Announcement bar (optional)
+  - Logo, PRAALI wordmark, navigation, cart
+  - "About Us" opens a dropdown (mega menu) with links + 3 picture cards
+  - On phones the links move into a "Menu" panel
+  Everything is editable in the theme editor under Header.
+{%- endcomment -%}
+
 <header class="site-header">
+  {%- if section.settings.show_announcement and section.settings.announcement_text != blank -%}
+    <div class="announcement">
+      {%- if section.settings.announcement_link != blank -%}
+        <a href="{{ section.settings.announcement_link }}">{{ section.settings.announcement_text }}</a>
+      {%- else -%}
+        {{ section.settings.announcement_text }}
+      {%- endif -%}
+    </div>
+  {%- endif -%}
+
   <div class="container header-inner">
     <a href="{{ routes.root_url }}" class="brand-mark" aria-label="{{ shop.name }} home">
       <img src="{{ 'praali_mark.png' | asset_url }}" alt="{{ shop.name }}" />
     </a>
+
     <a href="{{ routes.root_url }}" class="brand-wordmark">PRAALI</a>
-    <nav class="nav nav-right">
-      <a href="{{ routes.cart_url }}" class="cart-link">CART ({{ cart.item_count }})</a>
+
+    <nav class="nav nav-right" aria-label="Main">
+      <ul class="nav-list">
+        {%- if section.settings.shop_label != blank -%}
+          <li class="nav-item"><a href="{{ section.settings.shop_url }}">{{ section.settings.shop_label }}</a></li>
+        {%- endif -%}
+
+        {%- if section.settings.events_label != blank -%}
+          <li class="nav-item"><a href="{{ section.settings.events_url }}">{{ section.settings.events_label }}</a></li>
+        {%- endif -%}
+
+        {%- if section.settings.about_label != blank -%}
+          <li class="nav-item nav-item--mega">
+            <a href="{{ section.settings.about_url }}" aria-haspopup="true">{{ section.settings.about_label }}</a>
+
+            <div class="mega-panel">
+              <div class="mega-panel__inner">
+                <ul class="mega-panel__links">
+                  {%- for i in (1..5) -%}
+                    {%- assign label_key = 'about_link_' | append: i | append: '_label' -%}
+                    {%- assign url_key = 'about_link_' | append: i | append: '_url' -%}
+                    {%- if section.settings[label_key] != blank -%}
+                      <li><a href="{{ section.settings[url_key] }}">{{ section.settings[label_key] }}</a></li>
+                    {%- endif -%}
+                  {%- endfor -%}
+                </ul>
+
+                <div class="mega-panel__cards">
+                  {%- for i in (1..3) -%}
+                    {%- assign image_key = 'card_' | append: i | append: '_image' -%}
+                    {%- assign title_key = 'card_' | append: i | append: '_title' -%}
+                    {%- assign subtitle_key = 'card_' | append: i | append: '_subtitle' -%}
+                    {%- assign card_url_key = 'card_' | append: i | append: '_url' -%}
+                    {%- if section.settings[title_key] != blank -%}
+                      <a class="mega-card" href="{{ section.settings[card_url_key] }}">
+                        {%- if section.settings[image_key] != blank -%}
+                          {{
+                            section.settings[image_key]
+                            | image_url: width: 600
+                            | image_tag: class: 'mega-card__image', loading: 'lazy', widths: '300, 450, 600', sizes: '220px'
+                          }}
+                        {%- else -%}
+                          {{ 'image' | placeholder_svg_tag: 'mega-card__image mega-card__placeholder' }}
+                        {%- endif -%}
+                        <span class="mega-card__text">
+                          <span class="mega-card__title">{{ section.settings[title_key] }}</span>
+                          {%- if section.settings[subtitle_key] != blank -%}
+                            <span class="mega-card__subtitle">{{ section.settings[subtitle_key] }}</span>
+                          {%- endif -%}
+                        </span>
+                        <span class="mega-card__button">{{ section.settings.card_button_label }}</span>
+                      </a>
+                    {%- endif -%}
+                  {%- endfor -%}
+                </div>
+              </div>
+            </div>
+          </li>
+        {%- endif -%}
+
+        <li class="nav-item"><a href="{{ routes.cart_url }}" class="cart-link">CART ({{ cart.item_count }})</a></li>
+      </ul>
+
+      {%- comment -%} Phone menu: <details> opens/closes without any JavaScript {%- endcomment -%}
+      <details class="mobile-menu">
+        <summary class="mobile-menu__toggle" aria-label="Open menu">Menu</summary>
+        <div class="mobile-menu__panel">
+          <ul>
+            {%- if section.settings.shop_label != blank -%}
+              <li><a href="{{ section.settings.shop_url }}">{{ section.settings.shop_label }}</a></li>
+            {%- endif -%}
+            {%- if section.settings.events_label != blank -%}
+              <li><a href="{{ section.settings.events_url }}">{{ section.settings.events_label }}</a></li>
+            {%- endif -%}
+            {%- if section.settings.about_label != blank -%}
+              <li class="mobile-menu__group">
+                <a href="{{ section.settings.about_url }}">{{ section.settings.about_label }}</a>
+                <ul>
+                  {%- for i in (2..5) -%}
+                    {%- assign label_key = 'about_link_' | append: i | append: '_label' -%}
+                    {%- assign url_key = 'about_link_' | append: i | append: '_url' -%}
+                    {%- if section.settings[label_key] != blank -%}
+                      <li><a href="{{ section.settings[url_key] }}">{{ section.settings[label_key] }}</a></li>
+                    {%- endif -%}
+                  {%- endfor -%}
+                </ul>
+              </li>
+            {%- endif -%}
+          </ul>
+        </div>
+      </details>
+
+      <a href="{{ routes.cart_url }}" class="cart-link cart-link--mobile">CART ({{ cart.item_count }})</a>
     </nav>
   </div>
 </header>
 
+{% stylesheet %}
+  /* ---------- Announcement bar ---------- */
+  .announcement {
+    background: var(--brand-green, #5C6B4B);
+    color: #fff;
+    text-align: center;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    padding: 7px 16px;
+  }
+
+  .announcement a {
+    color: inherit;
+    text-decoration: none;
+  }
+
+  /* ---------- Navigation (desktop) ---------- */
+  .nav-list {
+    display: flex;
+    align-items: center;
+    gap: 28px;
+    list-style: none;
+  }
+
+  .site-header .nav-item > a {
+    color: #5C6B4B;
+    text-decoration: none;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 12px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+
+  .site-header .nav-item > a:hover {
+    opacity: 0.6;
+  }
+
+  /* ---------- About Us dropdown (mega menu) ---------- */
+  .mega-panel {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: #fff;
+    border-bottom: 1px solid var(--line);
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-6px);
+    transition: opacity 0.2s ease, transform 0.2s ease, visibility 0.2s;
+  }
+
+  /* Invisible "bridge" so the menu stays open while the mouse moves down to it */
+  .mega-panel::before {
+    content: "";
+    position: absolute;
+    bottom: 100%;
+    left: 0;
+    right: 0;
+    height: 32px;
+  }
+
+  .nav-item--mega:hover .mega-panel,
+  .nav-item--mega:focus-within .mega-panel {
+    opacity: 1;
+    visibility: visible;
+    transform: none;
+  }
+
+  .mega-panel__inner {
+    display: grid;
+    grid-template-columns: 220px 1fr;
+    gap: 40px;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 28px 24px 36px;
+  }
+
+  .mega-panel__links {
+    list-style: none;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  }
+
+  .mega-panel__links li + li {
+    margin-top: 10px;
+  }
+
+  .mega-panel__links a {
+    color: var(--ink);
+    text-decoration: none;
+    font-size: 11px;
+    letter-spacing: 0.08em;
+  }
+
+  .mega-panel__links li:first-child a {
+    font-weight: 700;
+  }
+
+  .mega-panel__links a:hover {
+    text-decoration: underline;
+  }
+
+  .mega-panel__cards {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+    justify-self: end;
+    width: min(100%, 720px);
+  }
+
+  .mega-card {
+    position: relative;
+    display: block;
+    aspect-ratio: 4 / 5;
+    overflow: hidden;
+    color: #fff;
+    text-decoration: none;
+    background: var(--line);
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  }
+
+  .mega-card__image {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .mega-card__placeholder {
+    fill: rgba(0, 44, 57, 0.2);
+  }
+
+  .mega-card__text {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    padding: 20px 12px 40px;
+    text-align: center;
+    background: linear-gradient(to bottom, rgba(0, 0, 0, 0.35), rgba(0, 0, 0, 0));
+  }
+
+  .mega-card__title {
+    display: block;
+    font-size: 12px;
+    letter-spacing: 0.1em;
+  }
+
+  .mega-card__subtitle {
+    display: block;
+    margin-top: 4px;
+    font-size: 8px;
+    letter-spacing: 0.08em;
+  }
+
+  .mega-card__button {
+    position: absolute;
+    bottom: 18px;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 6px 14px;
+    border-radius: 999px;
+    background: #fff;
+    color: var(--ink);
+    font-size: 8px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    white-space: nowrap;
+  }
+
+  /* ---------- Phone menu (hidden on desktop) ---------- */
+  .mobile-menu,
+  .cart-link--mobile {
+    display: none;
+  }
+
+  @media (max-width: 749px) {
+    .nav-list {
+      display: none;
+    }
+
+    .nav-right {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .brand-wordmark {
+      font-size: 20px;
+    }
+
+    .mobile-menu,
+    .cart-link--mobile {
+      display: block;
+    }
+
+    .site-header .cart-link--mobile {
+      font-size: 11px;
+      text-decoration: none;
+    }
+
+    .mobile-menu__toggle {
+      list-style: none;
+      cursor: pointer;
+      color: #5C6B4B;
+      font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+      font-size: 11px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    .mobile-menu__toggle::-webkit-details-marker {
+      display: none;
+    }
+
+    .mobile-menu__panel {
+      position: absolute;
+      top: 100%;
+      left: 0;
+      right: 0;
+      background: #fff;
+      border-bottom: 1px solid var(--line);
+      padding: 20px 24px 28px;
+      font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    }
+
+    .mobile-menu__panel ul {
+      list-style: none;
+    }
+
+    .mobile-menu__panel > ul > li + li {
+      margin-top: 16px;
+    }
+
+    .mobile-menu__panel a {
+      color: var(--ink);
+      text-decoration: none;
+      font-size: 13px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+
+    .mobile-menu__group ul {
+      margin-top: 10px;
+      padding-left: 14px;
+    }
+
+    .mobile-menu__group ul li + li {
+      margin-top: 8px;
+    }
+
+    .mobile-menu__group ul a {
+      font-size: 11px;
+      text-transform: none;
+    }
+  }
+  /* ---------- Override old theme.css nav rules inside the dropdowns ---------- */
+  .site-header .nav .mega-panel a,
+  .site-header .nav .mobile-menu__panel a {
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    text-transform: none;
+    letter-spacing: 0.06em;
+    color: var(--ink);
+  }
+
+  .site-header .nav .mega-panel__links a {
+    font-size: 11px;
+  }
+
+    .site-header .nav .mega-panel .mega-card {
+    color: #fff;
+    font-size: inherit;
+    letter-spacing: normal;
+  }
+  /* Phone: keep cart on one line and shorten the announcement bar */
+  @media (max-width: 749px) {
+    .site-header .nav .cart-link--mobile {
+      font-size: 11px;
+      letter-spacing: 0.1em;
+      white-space: nowrap;
+    }
+
+    .announcement {
+      font-size: 9px;
+      letter-spacing: 0.12em;
+      padding: 6px 12px;
+    }
+  }
+{% endstylesheet %}
+
 {% schema %}
 {
   "name": "Header",
-  "settings": []
+  "settings": [
+    { "type": "header", "content": "Announcement bar" },
+    { "type": "checkbox", "id": "show_announcement", "label": "Show announcement bar", "default": true },
+    { "type": "text", "id": "announcement_text", "label": "Text", "default": "Join the waitlist for our Fall / Winter collection" },
+    { "type": "text", "id": "announcement_link", "label": "Link (optional)", "info": "e.g. /pages/waitlist" },
+
+    { "type": "header", "content": "Menu links" },
+    { "type": "text", "id": "shop_label", "label": "Shop: label", "default": "Shop" },
+    { "type": "text", "id": "shop_url", "label": "Shop: link", "default": "/collections/all" },
+    { "type": "text", "id": "events_label", "label": "Events: label", "default": "Events" },
+    { "type": "text", "id": "events_url", "label": "Events: link", "default": "/pages/events" },
+    { "type": "text", "id": "about_label", "label": "About Us: label", "default": "About Us" },
+    { "type": "text", "id": "about_url", "label": "About Us: link", "default": "/pages/about" },
+
+    { "type": "header", "content": "About Us dropdown: links" },
+    { "type": "text", "id": "about_link_1_label", "label": "Link 1: label", "default": "About Us" },
+    { "type": "text", "id": "about_link_1_url", "label": "Link 1: link", "default": "/pages/about" },
+    { "type": "text", "id": "about_link_2_label", "label": "Link 2: label", "default": "Who We Are" },
+    { "type": "text", "id": "about_link_2_url", "label": "Link 2: link", "default": "/pages/about" },
+    { "type": "text", "id": "about_link_3_label", "label": "Link 3: label", "default": "Our Practices" },
+    { "type": "text", "id": "about_link_3_url", "label": "Link 3: link", "default": "/pages/about" },
+    { "type": "text", "id": "about_link_4_label", "label": "Link 4: label", "default": "Why India" },
+    { "type": "text", "id": "about_link_4_url", "label": "Link 4: link", "default": "/pages/why-india" },
+    { "type": "text", "id": "about_link_5_label", "label": "Link 5: label", "default": "Love Letters from Praali" },
+    { "type": "text", "id": "about_link_5_url", "label": "Link 5: link", "default": "/blogs/journal" },
+
+    { "type": "header", "content": "About Us dropdown: picture cards" },
+    { "type": "text", "id": "card_button_label", "label": "Button label on cards", "default": "Learn more" },
+
+    { "type": "image_picker", "id": "card_1_image", "label": "Card 1: image" },
+    { "type": "text", "id": "card_1_title", "label": "Card 1: title", "default": "Love Letters From Praali" },
+    { "type": "text", "id": "card_1_subtitle", "label": "Card 1: subtitle" },
+    { "type": "text", "id": "card_1_url", "label": "Card 1: link", "default": "/blogs/journal" },
+
+    { "type": "image_picker", "id": "card_2_image", "label": "Card 2: image" },
+    { "type": "text", "id": "card_2_title", "label": "Card 2: title", "default": "About Us" },
+    { "type": "text", "id": "card_2_subtitle", "label": "Card 2: subtitle", "default": "Our practices, values and dreams" },
+    { "type": "text", "id": "card_2_url", "label": "Card 2: link", "default": "/pages/about" },
+
+    { "type": "image_picker", "id": "card_3_image", "label": "Card 3: image" },
+    { "type": "text", "id": "card_3_title", "label": "Card 3: title", "default": "Why India" },
+    { "type": "text", "id": "card_3_subtitle", "label": "Card 3: subtitle", "default": "Yoga comes from India" },
+    { "type": "text", "id": "card_3_url", "label": "Card 3: link", "default": "/pages/why-india" }
+  ]
 }
 {% endschema %}
