@@ -23,7 +23,48 @@
     </div>
     <p class="footer-copy">{{ 'now' | date: '%Y' }} {{ shop.name }}. All rights reserved</p>
   </div>
+
+  {%- comment -%}
+    Policy links (Refund, Shipping, Privacy, Terms...).
+    They come automatically from Shopify admin → Settings → Policies,
+    so only policies the store has filled in are shown.
+  {%- endcomment -%}
+  {%- if section.settings.show_policies -%}
+    <nav class="footer-policies" aria-label="Store policies">
+      {%- if section.settings.faq_label != blank and section.settings.faq_url != blank -%}
+        <a href="{{ section.settings.faq_url }}">{{ section.settings.faq_label }}</a>
+      {%- endif -%}
+      {%- for policy in shop.policies -%}
+        {%- if policy.body != blank -%}
+          <a href="{{ policy.url }}">{{ policy.title }}</a>
+        {%- endif -%}
+      {%- endfor -%}
+    </nav>
+  {%- endif -%}
 </footer>
+
+{% stylesheet %}
+  .footer-policies {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 8px 28px;
+    padding: 16px 24px 24px;
+    border-top: 1px solid var(--line);
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  }
+
+  .footer-policies a {
+    color: #5C6B4B;
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    text-decoration: none;
+  }
+
+  .footer-policies a:hover {
+    text-decoration: underline;
+  }
+{% endstylesheet %}
 
 {% schema %}
 {
@@ -46,6 +87,29 @@
       "id": "contact_email",
       "label": "Contact email",
       "default": "praalico@gmail.com"
+    },
+    {
+      "type": "header",
+      "content": "Policy links"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_policies",
+      "label": "Show policy links",
+      "info": "Lists the policies filled in under Settings → Policies (Refund, Shipping, Privacy, Terms)",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "faq_label",
+      "label": "FAQ link: label",
+      "default": "FAQ"
+    },
+    {
+      "type": "text",
+      "id": "faq_url",
+      "label": "FAQ link: URL",
+      "default": "/pages/faq"
     }
   ]
 }
