@@ -12,7 +12,8 @@
     "hero": {
       "type": "page-hero",
       "settings": {
-        "height": 60,
+        "image": "shopify://shop_images/DSC03838.jpg",
+        "height": 75,
         "height_mobile": 50,
         "focus": "center"
       }
@@ -23,6 +24,7 @@
         "row_1": {
           "type": "row",
           "settings": {
+            "image": "shopify://shop_images/DSC01735.jpg",
             "image_position": "right",
             "title": "",
             "text": "<p>Praali makes functional, ethically made, Indian craft-inspired Yoga clothes. Designed by women, our pieces use natural fibers and are made with women’s bodies, lives, and practices in mind.</p><p>Above all, our clothes are simply a vehicle for bringing reverence, recognition, and revenue back to India, where Yoga began.</p>",
@@ -59,6 +61,7 @@
         "practice_1": {
           "type": "practice",
           "settings": {
+          
             "title": "Ethical Manufacturing",
             "text": "<p>We partner with factories that pay fair wages, provide good working conditions, and prohibit child labor.<br>We produce in small batches to minimize waste and recycle scrap fabric.</p>"
           }
@@ -92,6 +95,7 @@
         "practice_4"
       ],
       "settings": {
+        "image": "shopify://shop_images/DSC01668.jpg",
         "heading": "Our Practices",
         "background": "#e3ddd3",
         "padding_top": 72,
