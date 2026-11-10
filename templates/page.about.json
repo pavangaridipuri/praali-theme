@@ -1,3 +1,12 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "sections": {
     "hero": {
@@ -10,40 +19,42 @@
     },
     "about_rows": {
       "type": "image-text",
-      "settings": {
-        "heading": "About Us",
-        "padding_top": 64,
-        "padding_bottom": 64
-      },
       "blocks": {
         "row_1": {
           "type": "row",
           "settings": {
             "image_position": "right",
-            "text": "<p>Praali makes functional, ethically made, Indian craft-inspired Yoga clothes. Designed by women, our pieces use natural fibers and are made with women’s bodies, lives, and practices in mind.</p><p>Above all, our clothes are simply a vehicle for bringing reverence, recognition, and revenue back to India, where Yoga began.</p>"
+            "title": "",
+            "text": "<p>Praali makes functional, ethically made, Indian craft-inspired Yoga clothes. Designed by women, our pieces use natural fibers and are made with women’s bodies, lives, and practices in mind.</p><p>Above all, our clothes are simply a vehicle for bringing reverence, recognition, and revenue back to India, where Yoga began.</p>",
+            "button_label": "",
+            "button_link": ""
           }
         },
         "row_2": {
           "type": "row",
           "settings": {
+            "image": "shopify://shop_images/DSC01841.jpg",
             "image_position": "left",
-            "text": "<p>We reject the extremes of modern wellness: the pressure to be perfectly disciplined, impossibly beautiful, or endlessly optimized.</p><p>We believe there’s room for girlhood in wellness. For creativity, whimsy, pleasure, and a little unseriousness.</p>"
+            "title": "",
+            "text": "<p>We reject the extremes of modern wellness: the pressure to be perfectly disciplined, impossibly beautiful, or endlessly optimized.</p><p>We believe there’s room for girlhood in wellness. For creativity, whimsy, pleasure, and a little unseriousness.</p>",
+            "button_label": "",
+            "button_link": ""
           }
         }
       },
       "block_order": [
         "row_1",
         "row_2"
-      ]
+      ],
+      "settings": {
+        "heading": "About Us",
+        "background": "",
+        "padding_top": 64,
+        "padding_bottom": 64
+      }
     },
     "practices": {
       "type": "practices",
-      "settings": {
-        "heading": "Our Practices",
-        "background": "#E3DDD3",
-        "padding_top": 72,
-        "padding_bottom": 72
-      },
       "blocks": {
         "practice_1": {
           "type": "practice",
@@ -79,7 +90,13 @@
         "practice_2",
         "practice_3",
         "practice_4"
-      ]
+      ],
+      "settings": {
+        "heading": "Our Practices",
+        "background": "#e3ddd3",
+        "padding_top": 72,
+        "padding_bottom": 72
+      }
     },
     "love_letters": {
       "type": "love-letters",
@@ -88,7 +105,9 @@
         "subtitle": "<p>Everything at Praali comes from love.<br>Discover the thought behind it:</p>",
         "blog": "journal",
         "articles_to_show": 3,
-        "button_label": "Read more"
+        "button_label": "Read more",
+        "padding_top": 64,
+        "padding_bottom": 80
       }
     }
   },

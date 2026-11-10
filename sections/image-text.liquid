@@ -33,7 +33,17 @@
           {%- endif -%}
         </div>
 
-        <div class="image-text__media">
+        {%- liquid
+          case block.settings.image_shape
+            when 'square'
+              assign img_ratio = '1 / 1'
+            when 'portrait'
+              assign img_ratio = '4 / 5'
+            else
+              assign img_ratio = '4 / 3'
+          endcase
+        -%}
+        <div class="image-text__media" style="--img-ratio: {{ img_ratio }}; --img-focus: {{ block.settings.image_focus | default: 'center' }};">
           {%- if block.settings.image != blank -%}
             {{
               block.settings.image
@@ -89,8 +99,9 @@
     display: block;
     width: 100%;
     height: auto;
-    aspect-ratio: 4 / 3;
+    aspect-ratio: var(--img-ratio, 4 / 3);
     object-fit: cover;
+    object-position: center var(--img-focus, center);
     background: var(--line);
   }
 
@@ -194,6 +205,29 @@
             { "value": "left", "label": "Left" }
           ],
           "default": "right"
+        },
+        {
+          "type": "select",
+          "id": "image_shape",
+          "label": "Image shape",
+          "options": [
+            { "value": "landscape", "label": "Landscape (4:3)" },
+            { "value": "square", "label": "Square" },
+            { "value": "portrait", "label": "Portrait (4:5)" }
+          ],
+          "default": "landscape"
+        },
+        {
+          "type": "select",
+          "id": "image_focus",
+          "label": "Crop focus",
+          "info": "When the photo is cropped, keep this part visible (e.g. Top to keep faces)",
+          "options": [
+            { "value": "top", "label": "Top" },
+            { "value": "center", "label": "Middle" },
+            { "value": "bottom", "label": "Bottom" }
+          ],
+          "default": "center"
         },
         {
           "type": "text",
